@@ -10,7 +10,7 @@
      
 					2. 가장 앞부분에 포지션 임베딩을 넣어 위치값을 보존한다. 왼쪽상단은 왼쪽위가 가장 활성화되어있고 중앙은 중앙이 가장 활성화되어있다. 이런 포지션 임베딩을 각각에 맞는 패치에 더해 위치값을 보존한다.
      
-					![image](https://github.com/Crswd38/ViT/assets/105415745/1572186e-6e6e-47ee-8539-aec09e17a005)
+					![image1](https://github.com/Crswd38/ViT/blob/main/image.webp)
      
 					3. 임베딩된 패치들이 input으로 들어가면 각각을 Normalization 취한다.
      
@@ -24,5 +24,5 @@
      
 					8. Transformer Encoder의 아웃풋은 MLP를 통해 어떤 이미지인지 Classification 해줄 수 있다.
      
-					![image](https://github.com/Crswd38/ViT/assets/105415745/63f04632-270a-432e-818d-d35c283e1936)
+					![image2](https://github.com/Crswd38/ViT/blob/main/visualizing-positional-encodings-vit.webp)
      
