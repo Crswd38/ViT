@@ -10,7 +10,7 @@
 	
 	2. 가장 앞부분에 포지션 임베딩을 넣어 위치값을 보존한다. 왼쪽상단은 왼쪽위가 가장 활성화되어있고 중앙은 중앙이 가장 활성화되어있다. 이런 포지션 임베딩을 각각에 맞는 패치에 더해 위치값을 보존한다.
 
-![image1](https://github.com/Crswd38/ViT/blob/main/readmeImage.png)
+![image1](https://github.com/Crswd38/ViT/blob/main/readmeImage2.png)
 
 	3. 임베딩된 패치들이 input으로 들어가면 각각을 Normalization 취한다.
 	
