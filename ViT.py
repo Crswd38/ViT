@@ -88,7 +88,10 @@ for i in range(0, 196):
     ax = fig.add_subplot(14, 14, i+1)  # Matplotlib subplot을 추가한다.
     ax.axes.get_xaxis().set_visible(False)
     ax.axes.get_yaxis().set_visible(False)  # subplot의 x 및 y 축을 숨긴다.
-    ax.imshow(patch) # 현재 패치를 subplot에 이미지로 표시한다.
+    try:
+        ax.imshow(patch) # 현재 패치를 subplot에 이미지로 표시한다.
+    except:
+        pass
 plt.show()
 
 ##################################################################################################################################################################
