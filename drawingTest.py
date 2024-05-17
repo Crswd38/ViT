@@ -1,3 +1,15 @@
+#################################################################################################################################################################
+#
+# 터미널에 한번씩 치고 시작
+# pip install timm
+# pip install torch
+# pip install torchvision
+# pip install wget
+# wget https://storage.googleapis.com/bit_models/ilsvrc2012_wordnet_lemmas.txt -O ilsvrc2012_wordnet_lemmas.txt
+# pip install PyQt5
+#
+##################################################################################################################################################################
+
 import sys
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
