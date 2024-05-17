@@ -104,7 +104,7 @@ class CWidget(QWidget):
         gb = QGroupBox('지우개')
         left.addWidget(gb)
  
-        hbox = QHBoxLayout(result)
+        hbox = QHBoxLayout()
         gb.setLayout(hbox)
          
         self.checkbox = QCheckBox('지우개 동작')
@@ -129,7 +129,7 @@ class CWidget(QWidget):
         hbox = QHBoxLayout()
         gb.setLayout(hbox)
          
-        label = QLabel()
+        label = QLabel(result)
         hbox.addWidget(label)
        
         left.addStretch(1)
@@ -209,9 +209,10 @@ class CWidget(QWidget):
 
     # 추론 결과를 출력하는 함수
     def print_inference_result(self, transformer_output, model):
-        result = model.head(transformer_output)  # 최종 출력 계산
-        result_label_id = int(torch.argmax(result))  # 결과에서 가장 높은 값을 가진 인덱스 추출
+        res = model.head(transformer_output)  # 최종 출력 계산
+        result_label_id = int(torch.argmax(res))  # 결과에서 가장 높은 값을 가진 인덱스 추출
         imagenet_labels = dict(enumerate(open('ilsvrc2012_wordnet_lemmas.txt')))  # ImageNet 레이블 로드
+        result = imagenet_labels[result_label_id]
         print(f"Inference result: id = {result_label_id}, label name = {imagenet_labels[result_label_id]}")  # 결과 출력
 
     def ViT(self):
