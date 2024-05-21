@@ -24,7 +24,7 @@ import torchvision.transforms as T
 
 from timm import create_model
 
-result = ""
+result = "1"
 
 class CWidget(QWidget):
 
@@ -48,7 +48,7 @@ class CWidget(QWidget):
         gb.setLayout(box)
  
         # 그룹박스 1 의 라디오 버튼 배치
-        text = ['line', 'Curve', 'Rectange', 'Ellipse']
+        text = ['직선', '곡선', '사각형', '원']
         self.radiobtns = []
  
         for i in range(len(text)):
@@ -56,8 +56,8 @@ class CWidget(QWidget):
             self.radiobtns[i].clicked.connect(self.radioClicked)
             box.addWidget(self.radiobtns[i])
  
-        self.radiobtns[0].setChecked(True)
-        self.drawType = 0
+        self.radiobtns[1].setChecked(True)
+        self.drawType = 1
          
         # 그룹박스2 펜 설정
         gb = QGroupBox('펜 설정')
@@ -104,12 +104,17 @@ class CWidget(QWidget):
         gb = QGroupBox('지우개')
         left.addWidget(gb)
  
-        hbox = QHBoxLayout()
-        gb.setLayout(hbox)
+        grid = QGridLayout()
+        gb.setLayout(grid)
          
-        self.checkbox = QCheckBox('지우개 동작')
+        self.checkbox = QCheckBox('지우개')
         self.checkbox.stateChanged.connect(self.checkClicked)
-        hbox.addWidget(self.checkbox)
+        grid.addWidget(self.checkbox, 0, 0)
+
+        self.clearbtn = QPushButton('전체 지우기')
+        self.clearbtn.clicked.connect(self.clearall)
+        grid.addWidget(self.clearbtn, 1, 0)
+        
  
         # 그룹박스5: 그림 저장 + ViT 동작
         gb = QGroupBox('그리기 완료')
@@ -122,8 +127,8 @@ class CWidget(QWidget):
         self.savebtn.clicked.connect(self.ViT)
         hbox.addWidget(self.savebtn)
 
-        # 그룹박스6 정답
-        gb = QGroupBox('정답')
+        # 그룹박스6 분석 결과
+        gb = QGroupBox('분석 결과')
         left.addWidget(gb)
  
         hbox = QHBoxLayout()
@@ -131,6 +136,7 @@ class CWidget(QWidget):
          
         label = QLabel(result)
         hbox.addWidget(label)
+        print(result)
        
         left.addStretch(1)
 
@@ -155,6 +161,9 @@ class CWidget(QWidget):
 
     def checkClicked(self):
         pass
+
+    def clearall(self):
+        self.view.scene.clear()
     
     def showColorDlg(self):
         
@@ -214,6 +223,8 @@ class CWidget(QWidget):
         imagenet_labels = dict(enumerate(open('ilsvrc2012_wordnet_lemmas.txt')))  # ImageNet 레이블 로드
         result = imagenet_labels[result_label_id]
         print(f"Inference result: id = {result_label_id}, label name = {imagenet_labels[result_label_id]}")  # 결과 출력
+        self.result = result
+        self.view.update()
 
     def ViT(self):
         filePath, _ = QFileDialog.getSaveFileName(self, "그림 저장", "", "PNG Files (*.png);;JPEG Files (*.jpeg)")
