@@ -24,13 +24,11 @@ import torchvision.transforms as T
 
 from timm import create_model
 
-result = "1"
-
 class CWidget(QWidget):
 
     def __init__(self):
         super().__init__()
- 
+
         # 전체 폼 박스
         formbox = QHBoxLayout()
         self.setLayout(formbox)
@@ -133,10 +131,9 @@ class CWidget(QWidget):
  
         hbox = QHBoxLayout()
         gb.setLayout(hbox)
-         
-        label = QLabel(result)
-        hbox.addWidget(label)
-        print(result)
+        
+        self.label1 = QLabel()
+        hbox.addWidget(self.label1)
        
         left.addStretch(1)
 
@@ -151,8 +148,8 @@ class CWidget(QWidget):
         formbox.setStretchFactor(left, 0)
         formbox.setStretchFactor(right, 1)
         
-        self.setGeometry(100, 100, 800, 500)
-        
+        self.setGeometry(100, 100, 800, 600)
+
     def radioClicked(self):
         for i in range(len(self.radiobtns)):
             if self.radiobtns[i].isChecked():
@@ -221,10 +218,8 @@ class CWidget(QWidget):
         res = model.head(transformer_output)  # 최종 출력 계산
         result_label_id = int(torch.argmax(res))  # 결과에서 가장 높은 값을 가진 인덱스 추출
         imagenet_labels = dict(enumerate(open('ilsvrc2012_wordnet_lemmas.txt')))  # ImageNet 레이블 로드
-        result = imagenet_labels[result_label_id]
+        self.label1.setText('\n'.join(imagenet_labels[result_label_id].replace(",", "").split()))
         print(f"Inference result: id = {result_label_id}, label name = {imagenet_labels[result_label_id]}")  # 결과 출력
-        self.result = result
-        self.view.update()
 
     def ViT(self):
         filePath, _ = QFileDialog.getSaveFileName(self, "그림 저장", "", "PNG Files (*.png);;JPEG Files (*.jpeg)")
