@@ -11,9 +11,11 @@
 ##################################################################################################################################################################
 
 import sys
+
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+
 import matplotlib.pyplot as plt
 import numpy as np
 import PIL
@@ -21,6 +23,8 @@ import PIL
 import torch
 import torch.nn.functional as F
 import torchvision.transforms as T
+
+from random import randint
 
 from timm import create_model
 
@@ -137,10 +141,24 @@ class CWidget(QWidget):
        
         left.addStretch(1)
 
+        # 그룹박스7 질문지
+        gb = QGroupBox()
+        right.addWidget(gb)
+ 
+        # hbox = QHBoxLayout()
+        # gb.setLayout(hbox)
+        
+        imagenet_labels = dict(enumerate(open('ilsvrc2012_wordnet_lemmas.txt')))
+        label = QLabel(imagenet_labels[randint(0, 1000)].replace("\n", ""))
+        right.insertWidget(0, label, alignment=Qt.AlignTop | Qt.AlignHCenter)
+        # hbox.addWidget(label)
+       
+        left.addStretch(1)
+
         # 우 레이아웃 박스에 그래픽 뷰 추가
         self.view = CView(self)
         right.addWidget(self.view)
- 
+
         # 전체 폼박스에 좌우 박스 배치
         formbox.addLayout(left)
         formbox.addLayout(right)
