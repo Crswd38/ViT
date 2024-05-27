@@ -145,13 +145,14 @@ class CWidget(QWidget):
         gb = QGroupBox()
         right.addWidget(gb)
  
-        # hbox = QHBoxLayout()
-        # gb.setLayout(hbox)
+        hbox = QHBoxLayout()
+        gb.setLayout(hbox)
         
         imagenet_labels = dict(enumerate(open('ilsvrc2012_wordnet_lemmas.txt')))
-        label = QLabel(imagenet_labels[randint(0, 1000)].replace("\n", ""))
-        right.insertWidget(0, label, alignment=Qt.AlignTop | Qt.AlignHCenter)
-        # hbox.addWidget(label)
+        # label = QLabel(imagenet_labels[randint(0, 1000)].replace("\n", ""))
+        label = QLabel("dragonfly")
+        label.setStyleSheet("font-size: 12pt; font-weight: bold;")
+        hbox.addWidget(label, alignment=Qt.AlignHCenter)
        
         left.addStretch(1)
 
@@ -312,10 +313,6 @@ class CView(QGraphicsView):
                 path.moveTo(self.start)
                 path.lineTo(self.end)
                 self.scene.addPath(path, pen)
- 
-                # Line 이용
-                #line = QLineF(self.start.x(), self.start.y(), self.end.x(), self.end.y())
-                #self.scene.addLine(line, pen)
                  
                 # 시작점을 다시 기존 끝점으로
                 self.start = e.pos()
