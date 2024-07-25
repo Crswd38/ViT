@@ -149,8 +149,7 @@ class CWidget(QWidget):
         gb.setLayout(hbox)
         
         imagenet_labels = dict(enumerate(open('ilsvrc2012_wordnet_lemmas.txt')))
-        # label = QLabel(imagenet_labels[randint(0, 1000)].replace("\n", ""))
-        label = QLabel("dragonfly")
+        label = QLabel(imagenet_labels[randint(0, 1000)].replace("\n", ""))
         label.setStyleSheet("font-size: 12pt; font-weight: bold;")
         hbox.addWidget(label, alignment=Qt.AlignHCenter)
        
